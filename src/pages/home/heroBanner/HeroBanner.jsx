@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import "./style.scss"
 import useFetch from '../../../hooks/useFetch'
-import Img from '../../../components/lazyLoadImage/img'
+import Img from '../../../components/lazyLoadImage/Img'
 import ContentWrapper from '../../../components/contentWrapper/ContentWrapper'
 
 
@@ -18,11 +18,13 @@ const HeroBanner = () => {
         const bg = url.backdrop + data?.results?.[Math.floor(Math.random() * 20)]?.backdrop_path
         setBackground(bg)
     }, [data])
+
     const searchQueryHandler = (e) => {
         if (e.key === "Enter" && query.length > 0) {
             navigate(`/search/${query}`)
         }
     }
+    
     return (
         <div className='heroBanner'>
             {!loading && <div className="backdrop-img">

@@ -15,8 +15,10 @@ const Tranding = () => {
     return (
         <div className='carouselSection'>
             <ContentWrapper>
-                <span className="carouselTitle">Tranding</span>
-                <SwitchTabs data={["Day", "Week"]} onTabChange={onTabChange} />
+                <div className="d-flex">
+                    <span className="carouselTitle">Tranding</span>
+                    <SwitchTabs data={["Day", "Week"]} onTabChange={onTabChange} />
+                </div>
             </ContentWrapper>
             <Carousel data={data?.results} loading={loading} />
         </div>

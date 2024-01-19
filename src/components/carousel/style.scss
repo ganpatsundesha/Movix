@@ -1,5 +1,17 @@
 @import "../../mixins.scss";
 
+.d-flex {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    @include xsm {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+
 .carousel {
     margin-bottom: 50px;
 

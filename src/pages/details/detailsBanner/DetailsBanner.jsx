@@ -87,14 +87,16 @@ const DetailsBanner = ({ video, crew }) => {
                                                     <span className="text">{toHoursAndMinutes(data.runtime)}</span>
                                                 </div>
                                             }
-                                            {data.spoken_languages &&
+                                            {data?.spoken_languages &&
                                                 <div className="infoItem">
                                                     <span className="text bold">
                                                         Languages: {" "}
                                                     </span>
                                                     <span className="text">{data.spoken_languages.map((langName, index) => {
+                                                        console.log(data?.spoken_languages.length);
+                                                        console.log(index);
                                                         return (
-                                                            <span key={index}>{`${langName.english_name}${", "}`}</span>
+                                                            <span key={index}>{langName.english_name}{data.spoken_languages.length - 1 !== index && ", "}</span>
                                                         )
                                                     })}</span>
                                                 </div>

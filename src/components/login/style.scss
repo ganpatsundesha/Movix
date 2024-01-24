@@ -1,0 +1,43 @@
+.register-box {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        min-width: 300px;
+
+        input[type="text"],
+        input[type="password"],
+        input[type="submit"] {
+            padding: 5px 10px;
+            width: 100%;
+            font-size: 20px;
+        }
+
+        input[type="submit"] {
+            cursor: pointer;
+        }
+    }
+
+
+    h2 {
+        font-size: 50px;
+        color: #fff;
+        line-height: 1.3;
+    }
+
+    .link {
+        color: #fff;
+        transition: all 0.4s;
+
+        &:hover {
+            color: #aaa;
+        }
+    }
+}

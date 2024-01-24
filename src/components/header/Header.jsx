@@ -9,7 +9,7 @@ import "./style.scss";
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 import logo from "../../assets/movix-logo.svg";
 
-const Header = () => {
+const Header = ({ setLoggedIn }) => {
     const [show, setShow] = useState("top");
     const [lastScrollY, setLastScrollY] = useState(0);
     const [mobileMenu, setMobileMenu] = useState(false);
@@ -17,6 +17,7 @@ const Header = () => {
     const [showSearch, setShowSearch] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
+
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -71,6 +72,11 @@ const Header = () => {
             navigate("/explore/tv")
 
         }
+        else if (type === "logout") {
+            navigate("/login")
+            localStorage.removeItem('user');
+            setLoggedIn(false);
+        }
         else if (type === "/") {
             navigate("/")
 
@@ -87,6 +93,7 @@ const Header = () => {
                 <ul className="menuItems">
                     <li className="menuItem" onClick={() => navigationHandlar("movie")}>Movies</li>
                     <li className="menuItem" onClick={() => navigationHandlar("tv")}>Tv Shows</li>
+                    <li className="menuItem" onClick={() => navigationHandlar("logout")}>Logout</li>
                     <li className="menuItem">
                         <HiOutlineSearch onClick={openSearch} />
                     </li>

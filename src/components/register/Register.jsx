@@ -1,21 +1,40 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import "./style.scss"
 import { Link, useNavigate } from 'react-router-dom'
+import { LoginContext } from '../../context/LoginData'
 
-const Register = ({ handleRegister, setLoggedIn, loggedIn }) => {
-
+const Register = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const naviagte = useNavigate()
 
+    const logindata = useContext(LoginContext)
+    console.log(logindata);
+
+
     const handelSubmit = (e) => {
         e.preventDefault()
         handleRegister(username, password)
-        if (loggedIn) {
-            naviagte('/')
-            setLoggedIn(true)
-            console.log(loggedIn);
+    }
+
+    const handleRegister = (username, password) => {
+        const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+        if (existingUsers.some((user) => user.username === username)) {
+            alert('Username is already taken. Please choose a different one.');
+            return;
         }
+        else {
+            const newUser = { username, password };
+            const updatedUsers = [...existingUsers, newUser];
+            localStorage.setItem('users', JSON.stringify(updatedUsers));
+
+            localStorage.setItem('user', JSON.stringify(newUser));
+            logindata.setLoggedIn(true)
+            logindata.setUser(newUser);
+            naviagte('/home')
+        }
+
     }
 
     return (
@@ -26,7 +45,7 @@ const Register = ({ handleRegister, setLoggedIn, loggedIn }) => {
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='password' />
                 <input type="submit" />
             </form>
-            <Link to="/login" className='link'>Login</Link>
+            <Link to="/" className='link'>Login</Link>
         </div>
     )
 }

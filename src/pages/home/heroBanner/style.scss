@@ -54,13 +54,17 @@
         margin: 0 auto;
 
         .title {
-            font-size: 50px;
+            font-size: 40px;
             font-weight: 700;
             margin-bottom: 10px;
 
+            span {
+                text-transform: capitalize;
+            }
+
             @include md {
                 margin-bottom: 0;
-                font-size: 90px;
+                font-size: 70px;
             }
         }
 

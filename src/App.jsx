@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { fetchDataFromApi } from "./utils/api"
 import { useSelector, useDispatch } from 'react-redux'
+import { LoginContext } from './context/LoginData'
 import { getApiConfiguration, getGenres } from './store/homeSlice'
 import Header from "./components/header/Header"
 import Footer from "./components/footer/Footer"
@@ -15,51 +16,21 @@ import Login from './components/Login/Login'
 
 const App = () => {
 
-    const [loggedIn, setLoggedIn] = useState(false)
-    const [user, setUser] = useState(null)
+    // login/ragister Functionality Start
+
+    const { loggedIn, setLoggedIn, user, setUser } = useContext(LoginContext)
 
     useEffect(() => {
         const curUser = JSON.parse(localStorage.getItem('user'))
+        console.log(curUser);
         if (curUser) {
             setLoggedIn(true)
             setUser(curUser);
         }
     }, [])
 
-    const handleRegister = (username, password) => {
-        // get existingUsers from localStorage
-        const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
 
-        if (existingUsers.some((user) => user.username === username)) {
-            alert('Username is already taken. Please choose a different one.');
-            return;
-        }
-
-        const newUser = { username, password };
-        const updatedUsers = [...existingUsers, newUser];
-        localStorage.setItem('users', JSON.stringify(updatedUsers));
-
-        localStorage.setItem('user', JSON.stringify(newUser));
-        setLoggedIn(true);
-        setUser(newUser);
-        return loggedIn
-    }
-
-    const handleLogin = (username, password) => {
-        const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
-
-        const loggedInUser = existingUsers.find(
-            (user) => user.username === username && user.password === password
-        );
-
-        if (loggedInUser) {
-            localStorage.setItem('user', JSON.stringify(loggedInUser));
-            setLoggedIn(true);
-            setUser(loggedInUser);
-        } else {
-            alert('Invalid username or password.');
-        }
-    }
+    // login/ragister Functionality end
 
     const dispatch = useDispatch()
     const url = useSelector((data) => {
@@ -103,14 +74,14 @@ const App = () => {
     return (
         <BrowserRouter>
             <Routes >
-                <Route path='/register' element={<Register setLoggedIn={setLoggedIn} loggedIn={loggedIn} handleRegister={handleRegister} />} />
-                <Route path='/login' element={<Login loggedIn={loggedIn} handleLogin={handleLogin} />} />
+                <Route path='/register' element={<Register />} />
+                <Route path='/' element={<Login />} />
             </Routes>
             {
                 loggedIn ? <>
-                    <Header setLoggedIn={setLoggedIn} />
+                    <Header />
                     <Routes>
-                        <Route path='/' element={<Home />} />
+                        <Route path='/home' element={<Home />} />
                         <Route path='/:mediaType/:id' element={<Details />} />
                         <Route path='/search/:query' element={<SearchResults />} />
                         <Route path='/explore/:mediaType' element={<Explore />} />
@@ -118,7 +89,6 @@ const App = () => {
                     </Routes>
                     <Footer /></> : <></>
             }
-
         </BrowserRouter>
     )
 }

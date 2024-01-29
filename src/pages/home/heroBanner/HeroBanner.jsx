@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import "./style.scss"
 import useFetch from '../../../hooks/useFetch'
 import Img from '../../../components/lazyLoadImage/Img'
 import ContentWrapper from '../../../components/contentWrapper/ContentWrapper'
+import { LoginContext } from '../../../context/LoginData'
 
 
 const HeroBanner = () => {
@@ -13,6 +14,8 @@ const HeroBanner = () => {
     const navigate = useNavigate()
     const { url } = useSelector((state) => state.home)
     const { data, loading } = useFetch('/movie/upcoming')
+
+    const logindata = useContext(LoginContext)
 
     useEffect(() => {
         const bg = url.backdrop + data?.results?.[Math.floor(Math.random() * 20)]?.backdrop_path
@@ -34,7 +37,7 @@ const HeroBanner = () => {
             <div className="opacity-layer"></div>
             <ContentWrapper>
                 <div className="heroBannerContent">
-                    <span className="title">Welcome.</span>
+                    <span className="title">Welcome <span>{logindata.user.username}</span></span>
                     <span className="subtitle">Millions of movies, TV shows and people to discover. Explore now.</span>
                     <div className="searchInput">
                         <input type="text" placeholder='Search for a movie, tv show' onKeyUp={searchQueryHandler} onChange={e => setQuery(e.target.value)} />

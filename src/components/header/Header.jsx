@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import { SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
@@ -8,8 +8,9 @@ import "./style.scss";
 
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 import logo from "../../assets/movix-logo.svg";
+import { LoginContext } from "../../context/LoginData";
 
-const Header = ({ setLoggedIn }) => {
+const Header = () => {
     const [show, setShow] = useState("top");
     const [lastScrollY, setLastScrollY] = useState(0);
     const [mobileMenu, setMobileMenu] = useState(false);
@@ -17,6 +18,8 @@ const Header = ({ setLoggedIn }) => {
     const [showSearch, setShowSearch] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
+
+    const logindata = useContext(LoginContext)
 
 
     useEffect(() => {
@@ -73,12 +76,12 @@ const Header = ({ setLoggedIn }) => {
 
         }
         else if (type === "logout") {
-            navigate("/login")
-            localStorage.removeItem('user');
-            setLoggedIn(false);
-        }
-        else if (type === "/") {
             navigate("/")
+            localStorage.removeItem('user');
+            logindata.setLoggedIn(false);
+        }
+        else if (type === "/home") {
+            navigate("/home")
 
         }
         setMobileMenu(false)
@@ -88,7 +91,7 @@ const Header = ({ setLoggedIn }) => {
         <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
             <ContentWrapper>
                 <div className="logo">
-                    <img src={logo} alt="Site-Logo" onClick={() => navigationHandlar("/")} />
+                    <img src={logo} alt="Site-Logo" onClick={() => navigationHandlar("/home")} />
                 </div>
                 <ul className="menuItems">
                     <li className="menuItem" onClick={() => navigationHandlar("movie")}>Movies</li>

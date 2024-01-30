@@ -9,7 +9,7 @@ import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 import useFetch from "../../../hooks/useFetch";
 import Genres from "../../../components/genres/Genres";
 import CircleRating from "../../../components/circleRating/CircleRating";
-import Img from "../../../components/lazyLoadImage/Img.jsx";
+import ImgComp from "../../../components/lazyLoadImage/ImgComp.jsx";
 import PosterFallback from "../../../assets/no-poster.png";
 import { PlayIcon } from "../PlayIcon"
 
@@ -39,13 +39,13 @@ const DetailsBanner = ({ video, crew }) => {
                         !!data &&
                         <div>
                             <div className="backdrop-img">
-                                <Img src={url.backdrop + data?.backdrop_path} />
+                                <ImgComp src={url.backdrop + data?.backdrop_path} />
                             </div>
                             <div className="opacity-layer"></div>
                             <ContentWrapper>
                                 <div className="content">
                                     <div className="left">
-                                        {data.poster_path ? <Img className="posterImg" src={url.backdrop + data.poster_path} /> : <Img className="posterImg" src={PosterFallback} />}
+                                        {data.poster_path ? <ImgComp className="posterImg" src={url.backdrop + data.poster_path} /> : <ImgComp className="posterImg" src={PosterFallback} />}
                                     </div>
                                     <div className="right">
                                         <div className="title">{`${data.name || data.title} (${dayjs(data?.release_date).format("YYYY")})`}</div>

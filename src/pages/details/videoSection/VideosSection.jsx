@@ -17,9 +17,8 @@ const VideosSection = ({ data, loading }) => {
 
     const carouselContainer = useRef()
 
-    const container = carouselContainer.current;
-    console.log(container?.offsetWidth);
     const navigation = (direction) => {
+        const container = carouselContainer.current;
 
         const scrollAmount = direction === "left" ? container.scrollLeft - (container.offsetWidth + 20) : container.scrollLeft + (container.offsetWidth + 20)
 

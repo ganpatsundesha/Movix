@@ -15,9 +15,9 @@ const Cast = ({ data, loading }) => {
     const { url } = useSelector((state) => state.home);
 
     const carouselContainer = useRef()
-    const container = carouselContainer.current;
 
     const navigation = (direction) => {
+        const container = carouselContainer.current;
         const scrollAmount = direction === "left" ? container.scrollLeft - (container.offsetWidth + 20) : container.scrollLeft + (container.offsetWidth + 20)
 
         container.scrollTo({

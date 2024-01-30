@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Routes, Route, Router } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import { fetchDataFromApi } from "./utils/api"
 import { useSelector, useDispatch } from 'react-redux'
 import { LoginContext } from './context/LoginData'
@@ -19,6 +19,7 @@ const App = () => {
     // login/ragister Functionality Start
 
     const { loggedIn, setLoggedIn, user, setUser } = useContext(LoginContext)
+    const navigate = useNavigate()
 
     useEffect(() => {
         const curUser = JSON.parse(localStorage.getItem('user'))
@@ -26,10 +27,13 @@ const App = () => {
             setLoggedIn(true)
             setUser(curUser);
         }
-    }, [])
+        else {
+            navigate('/login')
+        }
+    }, [loggedIn])
 
 
-    // login/ragister Functionality end
+    // login/register Functionality end
 
     const dispatch = useDispatch()
     const url = useSelector((data) => {
@@ -71,22 +75,6 @@ const App = () => {
     }
 
     return (
-        //     <Routes >
-        //         <Route path='/register' element={<Register />} />
-        //         <Route path='/' element={<Login />} />
-        //     </Routes>
-        //         {
-        //     loggedIn ? <>
-        //         <Header />
-        //         <Routes>
-        //             <Route path='/home' element={<Home />} />
-        //             <Route path='/:mediaType/:id' element={<Details />} />
-        //             <Route path='/search/:query' element={<SearchResults />} />
-        //             <Route path='/explore/:mediaType' element={<Explore />} />
-        //             <Route path='*' element={<PageNotFound />} />
-        //         </Routes>
-        //         <Footer /></> : <></>
-        // }
         <>
             {
                 loggedIn ? (

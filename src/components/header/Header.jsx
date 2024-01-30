@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import { SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
@@ -8,7 +8,7 @@ import "./style.scss";
 
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 import logo from "../../assets/movix-logo.svg";
-import { LoginContext } from "../../context/LoginData";
+import { useLogInData } from "../../context/LoginData";
 
 const Header = () => {
     const [show, setShow] = useState("top");
@@ -19,7 +19,7 @@ const Header = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const logindata = useContext(LoginContext)
+    const logindata = useLogInData()
 
 
     useEffect(() => {
@@ -76,12 +76,12 @@ const Header = () => {
 
         }
         else if (type === "logout") {
-            navigate("/")
+            navigate("/login")
             localStorage.removeItem('user');
             logindata.setLoggedIn(false);
         }
-        else if (type === "/home") {
-            navigate("/home")
+        else if (type === "/") {
+            navigate("/")
 
         }
         setMobileMenu(false)
@@ -91,7 +91,7 @@ const Header = () => {
         <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
             <ContentWrapper>
                 <div className="logo">
-                    <img src={logo} alt="Site-Logo" onClick={() => navigationHandlar("/home")} />
+                    <img src={logo} alt="Site-Logo" onClick={() => navigationHandlar("/")} />
                 </div>
                 <ul className="menuItems">
                     <li className="menuItem" onClick={() => navigationHandlar("movie")}>Movies</li>

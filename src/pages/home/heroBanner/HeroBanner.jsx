@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import "./style.scss"
 import useFetch from '../../../hooks/useFetch'
 import Img from '../../../components/lazyLoadImage/Img'
 import ContentWrapper from '../../../components/contentWrapper/ContentWrapper'
-import { LoginContext } from '../../../context/LoginData'
+import { useLogInData } from '../../../context/LoginData'
 
 
 const HeroBanner = () => {
@@ -15,7 +15,7 @@ const HeroBanner = () => {
     const { url } = useSelector((state) => state.home)
     const { data, loading } = useFetch('/movie/upcoming')
 
-    const logindata = useContext(LoginContext)
+    const logindata = useLogInData()
 
     useEffect(() => {
         const bg = url.backdrop + data?.results?.[Math.floor(Math.random() * 20)]?.backdrop_path

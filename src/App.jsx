@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Routes, Route, Router } from 'react-router-dom'
 import { fetchDataFromApi } from "./utils/api"
 import { useSelector, useDispatch } from 'react-redux'
 import { LoginContext } from './context/LoginData'
@@ -22,7 +22,6 @@ const App = () => {
 
     useEffect(() => {
         const curUser = JSON.parse(localStorage.getItem('user'))
-        console.log(curUser);
         if (curUser) {
             setLoggedIn(true)
             setUser(curUser);
@@ -72,24 +71,45 @@ const App = () => {
     }
 
     return (
-        <BrowserRouter>
-            <Routes >
-                <Route path='/register' element={<Register />} />
-                <Route path='/' element={<Login />} />
-            </Routes>
+        //     <Routes >
+        //         <Route path='/register' element={<Register />} />
+        //         <Route path='/' element={<Login />} />
+        //     </Routes>
+        //         {
+        //     loggedIn ? <>
+        //         <Header />
+        //         <Routes>
+        //             <Route path='/home' element={<Home />} />
+        //             <Route path='/:mediaType/:id' element={<Details />} />
+        //             <Route path='/search/:query' element={<SearchResults />} />
+        //             <Route path='/explore/:mediaType' element={<Explore />} />
+        //             <Route path='*' element={<PageNotFound />} />
+        //         </Routes>
+        //         <Footer /></> : <></>
+        // }
+        <>
             {
-                loggedIn ? <>
-                    <Header />
-                    <Routes>
-                        <Route path='/home' element={<Home />} />
-                        <Route path='/:mediaType/:id' element={<Details />} />
-                        <Route path='/search/:query' element={<SearchResults />} />
-                        <Route path='/explore/:mediaType' element={<Explore />} />
-                        <Route path='*' element={<PageNotFound />} />
-                    </Routes>
-                    <Footer /></> : <></>
-            }
-        </BrowserRouter>
+                loggedIn ? (
+                    <>
+                        <Header />
+                        <Routes>
+                            <Route path='/' element={<Home />} />
+                            <Route path='/:mediaType/:id' element={<Details />} />
+                            <Route path='/search/:query' element={<SearchResults />} />
+                            <Route path='/explore/:mediaType' element={<Explore />} />
+                            <Route path='*' element={<PageNotFound />} />
+                        </Routes>
+                        <Footer />
+                    </>
+                ) : (
+                    <>
+                        <Routes>
+                            <Route path='/register' element={<Register />} />
+                            <Route path='/login' element={<Login />} />
+                        </Routes>
+                    </>
+                )}
+        </>
     )
 }
 

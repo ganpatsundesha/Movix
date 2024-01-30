@@ -1,15 +1,14 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import "./style.scss"
 import { Link, useNavigate } from 'react-router-dom'
-import { LoginContext } from '../../context/LoginData'
+import { useLogInData } from '../../context/LoginData'
 
 const Register = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const naviagte = useNavigate()
 
-    const logindata = useContext(LoginContext)
-    console.log(logindata);
+    const logindata = useLogInData()
 
 
     const handelSubmit = (e) => {
@@ -20,8 +19,13 @@ const Register = () => {
     const handleRegister = (username, password) => {
         const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
 
-        if (existingUsers.some((user) => user.username === username)) {
-            alert('Username is already taken. Please choose a different one.');
+        if (existingUsers.some((user) => user.username === username) || password.length <= 4) {
+            if (existingUsers.some((user) => user.username === username)) {
+                alert('Username is already taken. Please choose a different one.');
+            }
+            else {
+                alert('Password Must be more then 4 Char...')
+            }
             return;
         }
         else {
@@ -32,7 +36,7 @@ const Register = () => {
             localStorage.setItem('user', JSON.stringify(newUser));
             logindata.setLoggedIn(true)
             logindata.setUser(newUser);
-            naviagte('/home')
+            naviagte('/')
         }
 
     }
@@ -45,7 +49,7 @@ const Register = () => {
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='password' />
                 <input type="submit" />
             </form>
-            <Link to="/" className='link'>Login</Link>
+            <Link to="/login" className='link'>Login</Link>
         </div>
     )
 }

@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import "./style.scss"
-import { LoginContext } from '../../context/LoginData'
+import { useLogInData } from '../../context/LoginData'
 
 const Login = () => {
 
-    const logindata = useContext(LoginContext)
+    const logindata = useLogInData()
     const navigate = useNavigate()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -27,7 +27,7 @@ const Login = () => {
             localStorage.setItem('user', JSON.stringify(loggedInUser));
             logindata.setLoggedIn(true);
             logindata.setUser(loggedInUser);
-            navigate('/home')
+            navigate('/')
         } else {
             alert('Invalid username or password.');
         }

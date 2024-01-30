@@ -12,7 +12,8 @@ import SearchResults from "./pages/searchResults/SearchResults"
 import Explore from "./pages/explore/Explore"
 import PageNotFound from "./pages/404/PageNotFound"
 import Register from './components/register/Register'
-import Login from './components/Login/Login'
+import Login from './components/login/Login'
+
 
 const App = () => {
 

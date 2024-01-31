@@ -52,11 +52,11 @@ const Register = () => {
             <form onSubmit={handelSubmit}>
                 <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder='Username' />
                 {
-                    registerName ? <><p>Username is already taken. Please choose a different one.</p></> : <></>
+                    registerName ? <><p>Username is already taken.</p></> : <></>
                 }
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='password' />
                 {
-                    registerPassword ? <><p>Password Must be more then 4 Char...</p></> : <></>
+                    registerPassword ? <><p>Password Must be more then 4 Characters!</p></> : <><p className='white'>Password Must be more then 4 Characters!</p></>
                 }
                 <input type="submit" />
             </form>

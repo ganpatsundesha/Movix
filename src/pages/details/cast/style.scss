@@ -60,12 +60,22 @@
             text-align: center;
             color: white;
 
+            &:hover {
+                .profileImg {
+                    img {
+                        transform: scale(1.1);
+                        opacity: 0.8;
+                    }
+                }
+            }
+
             .profileImg {
                 width: 125px;
                 height: 125px;
                 border-radius: 50%;
                 overflow: hidden;
                 margin-bottom: 15px;
+                transition: all 0.4s;
 
                 @include md {
                     width: 175px;
@@ -79,6 +89,8 @@
                     object-fit: cover;
                     object-position: center top;
                     display: block;
+                    overflow: hidden;
+                    transition: all 0.4s;
                 }
             }
 

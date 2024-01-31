@@ -44,8 +44,12 @@ const VideosSection = ({ data, loading }) => {
                 data?.results?.length > 0 ? <><div className="videosSection">
                     <ContentWrapper >
                         <div className="sectionHeading">Official Videos</div>
-                        <BsFillArrowLeftCircleFill className="carouselLeftNav arrow" onClick={() => navigation("left")} />
-                        <BsFillArrowRightCircleFill className="carouselRighttNav arrow" onClick={() => navigation("right")} />
+                        {
+                            data?.results?.length > 3 ? <>
+                                <BsFillArrowLeftCircleFill className="carouselLeftNav arrow" onClick={() => navigation("left")} />
+                                <BsFillArrowRightCircleFill className="carouselRighttNav arrow" onClick={() => navigation("right")} />
+                            </> : <></>
+                        }
                         {!loading ? (
                             <div className="videos" ref={carouselContainer}>
                                 {

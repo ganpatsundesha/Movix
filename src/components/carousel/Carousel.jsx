@@ -52,8 +52,13 @@ const Carousel = ({ data, loading, endPoint, title }) => {
                 {
                     title && <div className="carouselTitle">{title}</div>
                 }
-                <BsFillArrowLeftCircleFill className="carouselLeftNav arrow" onClick={() => navigation("left")} />
-                <BsFillArrowRightCircleFill className="carouselRighttNav arrow" onClick={() => navigation("right")} />
+                {
+                    data?.length > 4 ?
+                        <>
+                            <BsFillArrowLeftCircleFill className="carouselLeftNav arrow" onClick={() => navigation("left")} />
+                            <BsFillArrowRightCircleFill className="carouselRighttNav arrow" onClick={() => navigation("right")} />
+                        </> : <></>
+                }
                 {!loading ? <div className="carouselItems" ref={carouselContainer}>
                     {
                         data?.map((item) => {

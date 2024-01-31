@@ -61,8 +61,7 @@ const DetailsBanner = ({ video, crew }) => {
                                             }
                                             <div className="playbtn" onClick={() => {
                                                 setShow(true)
-                                                setVideoId(video.key)
-                                                console.log(video);
+                                                setVideoId(video?.key)
                                             }}>
                                                 <PlayIcon />
                                                 <span>Watch Trailer</span>

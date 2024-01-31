@@ -39,44 +39,48 @@ const VideosSection = ({ data, loading }) => {
     };
 
     return (
-        <div className="videosSection">
-            <ContentWrapper>
-                <div className="sectionHeading">Official Videos</div>
-                <BsFillArrowLeftCircleFill className="carouselLeftNav arrow" onClick={() => navigation("left")} />
-                <BsFillArrowRightCircleFill className="carouselRighttNav arrow" onClick={() => navigation("right")} />
-                {!loading ? (
-                    <div className="videos" ref={carouselContainer}>
-                        {
-                            data?.results?.map((video) => {
-                                return (
-                                    <div key={video.id} className="videoItem" onClick={() => {
-                                        setVideoId(video.key)
-                                        setShow(true)
-                                    }}>
-                                        <div className="videoThumbnail">{<ImgComp src={`https://img.youtube.com/vi/${video.key}/mqdefault.jpg`} />} <PlayIcon /></div>
-                                        <div className="videoTitle">{video.name}</div>
-                                    </div>
-                                )
-                            })
+        <>
+            {
+                data?.results?.length > 0 ? <><div className="videosSection">
+                    <ContentWrapper >
+                        <div className="sectionHeading">Official Videos</div>
+                        <BsFillArrowLeftCircleFill className="carouselLeftNav arrow" onClick={() => navigation("left")} />
+                        <BsFillArrowRightCircleFill className="carouselRighttNav arrow" onClick={() => navigation("right")} />
+                        {!loading ? (
+                            <div className="videos" ref={carouselContainer}>
+                                {
+                                    data?.results?.map((video) => {
+                                        return (
+                                            <div key={video.id} className="videoItem" onClick={() => {
+                                                setVideoId(video.key)
+                                                setShow(true)
+                                            }}>
+                                                <div className="videoThumbnail">{<ImgComp src={`https://img.youtube.com/vi/${video.key}/mqdefault.jpg`} />} <PlayIcon /></div>
+                                                <div className="videoTitle">{video.name}</div>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                        ) : (
+                            <div className="videoSkeleton">
+                                {loadingSkeleton()}
+                                {loadingSkeleton()}
+                                {loadingSkeleton()}
+                                {loadingSkeleton()}
+                            </div>
+                        )
                         }
-                    </div>
-                ) : (
-                    <div className="videoSkeleton">
-                        {loadingSkeleton()}
-                        {loadingSkeleton()}
-                        {loadingSkeleton()}
-                        {loadingSkeleton()}
-                    </div>
-                )
-                }
-            </ContentWrapper >
-            <VideoPopup
-                show={show}
-                setShow={setShow}
-                videoId={videoId}
-                setVideoId={setVideoId}
-            />
-        </div >
+                    </ContentWrapper >
+                    <VideoPopup
+                        show={show}
+                        setShow={setShow}
+                        videoId={videoId}
+                        setVideoId={setVideoId}
+                    />
+                </div ></> : <></>
+            }
+        </>
     );
 };
 

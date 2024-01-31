@@ -59,11 +59,13 @@ const Carousel = ({ data, loading, endPoint, title }) => {
                         data?.map((item) => {
                             const posterUrl = item.poster_path ? url.poster + item.poster_path : PosterFallback
                             return (
-                                <div key={item.id} className="carouselItem" onClick={() => navigate(`/${item.media_type || endPoint}/${item.id}`)}>
+                                <div key={item.id} className="carouselItem" onClick={() =>
+                                    navigate(`/${item?.media_type || endPoint}/${item.id}`)
+                                }>
                                     <div className="posterBlock">
                                         <ImgComp src={posterUrl} />
-                                        <CircleRating rating={item.vote_average.toFixed(1)} />
-                                        <Genres data={item.genre_ids.slice(0, 2)} />
+                                        <CircleRating rating={item?.vote_average?.toFixed(1)} />
+                                        <Genres data={item?.genre_ids?.slice(0, 2)} />
                                     </div>
                                     <div className="textBlock">
                                         <span className="title">{item.title || item.name}</span>
@@ -79,9 +81,10 @@ const Carousel = ({ data, loading, endPoint, title }) => {
                     {skItem()}
                     {skItem()}
                     {skItem()}
-                </div>}
-            </ContentWrapper>
-        </div>
+                </div>
+                }
+            </ContentWrapper >
+        </div >
     )
 }
 

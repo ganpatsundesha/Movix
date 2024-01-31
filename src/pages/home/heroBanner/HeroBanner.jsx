@@ -37,7 +37,7 @@ const HeroBanner = () => {
             <div className="opacity-layer"></div>
             <ContentWrapper>
                 <div className="heroBannerContent">
-                    <span className="title">Welcome <span>{logindata.user.username}</span></span>
+                    <span className="title">Welcome <span>{logindata?.user?.username?.split(/\s+/)[0]}</span></span>
                     <span className="subtitle">Millions of movies, TV shows and people to discover. Explore now.</span>
                     <div className="searchInput">
                         <input type="text" placeholder='Search for a movie, tv show' onKeyUp={searchQueryHandler} onChange={e => setQuery(e.target.value)} />

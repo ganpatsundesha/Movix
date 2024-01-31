@@ -9,6 +9,7 @@ const Login = () => {
     const navigate = useNavigate()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [loginUser, setLoginUser] = useState(false)
     const naviagte = useNavigate()
 
     const handelSubmit = (e) => {
@@ -29,7 +30,7 @@ const Login = () => {
             logindata.setUser(loggedInUser);
             navigate('/')
         } else {
-            alert('Invalid username or password.');
+            setLoginUser(true)
         }
     }
 
@@ -39,6 +40,9 @@ const Login = () => {
             <form onSubmit={handelSubmit}>
                 <input type="text" placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} />
                 <input type="password" placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                {
+                    loginUser ? <><p>Invalid username or password.</p></> : <></>
+                }
                 <input type="submit" />
             </form>
             <Link to="/register" className='link'>Register</Link>

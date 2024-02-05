@@ -6,6 +6,12 @@
     cursor: pointer;
     flex-shrink: 0;
 
+    &:hover {
+        img {
+            transform: scale(1.2);
+        }
+    }
+
     @include md {
         width: calc(25% - 15px);
     }
@@ -41,6 +47,7 @@
                 height: 100%;
                 object-fit: cover;
                 object-position: center;
+                transition: all 0.4s;
             }
         }
 

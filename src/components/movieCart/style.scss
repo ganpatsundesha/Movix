@@ -12,6 +12,10 @@
         }
     }
 
+    @include sm {
+        width: calc(33.33% - 7px);
+    }
+
     @include md {
         width: calc(25% - 15px);
     }
